@@ -1,35 +1,86 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="./assets/img/4geeks.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello Rigo with Vanilla.js</title>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta Aleatoria</title>
+  <style>
+    body {
+      background-color: greenyellow;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 5em;
+    }
+    #carta {
+      width: 150px;
+      height: 220px;
+      border: 1px solid black;
+      border-radius: 10px;
+      background-color: white;
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .esquina {
+      position: absolute;
+      font-size: 18px;
+      width: 30px;
+    }
+    #carta-top {
+      top: 5px;
+      left: 5px;
+    }
+    #carta-bottom {
+      bottom: 5px;
+      right: 5px;
+      transform: rotate(180deg);
+    }
+    #carta-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div id="carta">
+    <div id="carta-top" class="esquina"></div>
+    <div id="carta-center"></div>
+    <div id="carta-bottom" class="esquina"></div>
+  </div>
 
-    <!-- Fontawesome is our recomended library for icons -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <!-- Write your HTML code here, you can delete everything withing the body tags -->
-    <div class="container-fluid text-center">
-      <h1 class="mt-5">Hello Rigo!</h1>
-      <img src="./assets/img/rigo-baby.jpg" />
-      <p class="alert alert-warning mt-4">
-        If this text is <b>not</b> centered and <b>yellow</b>, you probably have
-        an error
-      </p>
-      <div class="fixed-bottom p-4">
-        Made with ❤️ by
-        <a href="https://www.4geeksacademy.com">4Geeks Academy</a>
-      </div>
-    </div>
+  <script>
 
-    <!-- Do not delete this script tag, this is what connects your HTML with the Javascript code -->
-    <script type="module" src="/app.js"></script>
-  </body>
+    var palos = ["Corazones", "Picas", "Tréboles", "Diamantes"];
+    var valores = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "K", "Q", "J", "A"];
+    var simbolos = {
+      "Corazones": "♥",
+      "Diamantes": "♦",
+      "Tréboles": "♣",
+      "Picas": "♠"
+    };
+
+
+    var iPalo = Math.floor(Math.random() * palos.length);
+    var iValor = Math.floor(Math.random() * valores.length);
+    var palo = palos[iPalo];
+    var valor = valores[iValor];
+    var simbolo = simbolos[palo];
+
+    var col;
+    if (palo == "Corazones" || palo == "Diamantes") {
+      col = "red";
+    } else {
+      col = "black";
+    }
+
+    document.getElementById("carta-top").innerHTML = valor + "<br>" + simbolo;
+    document.getElementById("carta-top").style.color = col;
+    document.getElementById("carta-bottom").innerHTML = valor + "<br>" + simbolo;
+    document.getElementById("carta-bottom").style.color = col;
+    document.getElementById("carta-center").innerHTML = simbolo;
+    document.getElementById("carta-center").style.color = col;
+  </script>
+</body>
 </html>
